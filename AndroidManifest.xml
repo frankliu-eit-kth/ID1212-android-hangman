@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="client.avtivities.MainActivity"
+            android:name="client.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +24,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="client.avtivities.GameActivity"
+            android:name="client.activities.GameActivity"
             android:label="@string/title_activity_game" >
         </activity>
         <activity
-            android:name="client.avtivities.ConnectionActivity"
+            android:name="client.activities.ConnectionActivity"
             android:label="@string/title_activity_connection" >
         </activity>
         <activity
-            android:name="client.avtivities.StartActivity"
+            android:name="client.activities.StartActivity"
             android:label="@string/title_activity_start" >
         </activity>
     </application>
