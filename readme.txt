@@ -2,16 +2,14 @@ About:
 	@Author: Liming(Frank) Liu
 	@contact: limingl@kth.se
 	@purpose of the project:
-		In this project I developed a three-tier web-based application using framework for all layers.
-		Web application framework: Spring Boot + Spring Web MVC + Thymeleaf
-		
+		In this project I implemented a simple Android Hangman game application.
 	@Code source & Copyright:
-		I learned part of the structure and code from code example provided by the course: https://github.com/KTH-ID1212/appserv-spring 
+		I learned part of the structure and code from code example provided by the course: https://github.com/KTH-ID1212/exercise5
 		Here is the license of the code example:
 			/*
 			 * The MIT License
 			 *
-			 * Copyright 2017 Leif Lindbäck <leifl@kth.se>.
+			 * Copyright 2017 Leif Lindb�ck <leifl@kth.se>.
 			 *
 			 * Permission is hereby granted, free of charge, to any person obtaining a copy
 			 * of this software and associated documentation files (the "Software"), to deal
@@ -31,32 +29,46 @@ About:
 			 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 			 * THE SOFTWARE.
 			 */
-	@Framework structure:
-	1. Spring boot:
-		dependency file: in pom.xml
-		configuration file: in application.properties
-		## read the comment in property file, there are 2 optional db types
-		## uncomment the first line if want to manually configure the thymeleaf template location
-	2. Spring MVC:
-		use annotations to auto-configure the server, see the annotations in code
-		1 mistake made: the entry point of application Main.class must be in the parent package of other component classes
-	3. Thymeleaf:
-		configuration: At first I copied Bank.config from the example file but it did't work in this project, so I deleted the configuration class and use default configuration
-		--default config: prefix /resources/templates/  suffix .html
-		
-		Thymeleaf gets template url from ViewController and auto-generate the front page by reading and implementing page element with th:xxx label
-		--Thymeleaf hides everything behind the scene, debugging could be devastating
-		--don't mess with it unless you have to
-	4. Web resources: 
-		in resources folder
-	5. code structure：
-		.model： MVC models
-		.dao:use repositories to serve as DAOs
-		.controller: the logic controller
-		.view: the request handler and related classes
+	@important notice:
+		This project is far from completely robust, there lies many problems which could could hinder the running of the application, namely:
+		-- IDE problem: I write the code in Eclipse, but clearly Eclipse is not suitable for Android development, Android Studio would be far more convenient. There lies many problems for developing on Eclipse
+		-- Android SDK problem: Android SDK/JDK/IDE compiler/Virtural devices versions are not always compatible with each other. 
+		   I cannot run latest version of virtual devices on my computer, the compromise is that I use following suite in my project:
+		   	Compiler: 1.6
+		    JRE lab: 1.8
+		    Android SDK version: minimum 24   target 28
+		    Virtual Device API verion: 19 (4.4.2)
+		-- When running emulator, the emulator has a different IP address other than "127.0.0.1", therefore need to manually edit the server address( IPv4 address) when building connection
 	
-	@Suggestion:
-		A friendly remind: 
-		Spring framework is powerful but at the same time too heavy to be handy, debugging is pure torture
-		SO, DON'T MESS WITH IT UNLESS YOU HAVE TO
-				 
+	@how to run: ( on emulator)
+		(1) start server
+		(2) check local machine's IPv4 address then edit in ConnectionActivity's HOST field
+		(3) configure correct compiler, JRE, Android SDK and Virtual Device's version
+		(4) clean, refresh to build the project
+		(5) start as Android application
+		
+	@debug: debugging information are shown in LogCat in Eclipse, which means that console will not show any debugging information.
+			e.printstacktrace() is not applicable in Android, use Log.e() instead
+		                        	
+	@Project structure:
+		Configuration:
+			-project.properties
+			-AndroidManifest.xml: major configuration file in Android App, configures:
+				permission required
+				sdk version
+				registry of activities( including default entry point)
+				
+		Resources:
+			-pictures: in drawble
+			-layout: stores all the layout file, could be edited in GUI.
+			-values: manages the id-value, each id could have different values like languages. different value packages are stored in different value folders
+		
+		Gen/: auto-generated file
+			-R file: A registry used in code to get/define/fill the component on UI. Component could show values in static/dynamic( coding) way
+			
+		src: 
+			server/common packages: same as Hangman Game project
+			client:
+				-net/ controller: modified in several places, but basically serves the same funcions
+				-activity: activity classes, each activity could be understood as a different page
+	
