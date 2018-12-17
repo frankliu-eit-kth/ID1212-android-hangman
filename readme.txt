@@ -32,12 +32,12 @@ About:
 	@important notice:
 		This project is far from completely robust, there lies many problems which could could hinder the running of the application, namely:
 		-- IDE problem: I write the code in Eclipse, but clearly Eclipse is not suitable for Android development, Android Studio would be far more convenient. There lies many problems for developing on Eclipse
-		-- Android SDK problem: Android SDK/JDK/IDE compiler/Virtural devices versions are not always compatible with each other. 
+		-- Android SDK problem: Android SDK/JDK/IDE compiler/Virtual devices versions are not always compatible with each other. 
 		   I cannot run latest version of virtual devices on my computer, the compromise is that I use following suite in my project:
 		   	Compiler: 1.6
-		    JRE lab: 1.8
+		    JRE lib: 1.8
 		    Android SDK version: minimum 24   target 28
-		    Virtual Device API verion: 19 (4.4.2)
+		    Virtual Device API version: 19 (4.4.2)
 		-- When running emulator, the emulator has a different IP address other than "127.0.0.1", therefore need to manually edit the server address( IPv4 address) when building connection
 	
 	@how to run: ( on emulator)
@@ -59,7 +59,7 @@ About:
 				registry of activities( including default entry point)
 				
 		Resources:
-			-pictures: in drawble
+			-pictures: in drawable
 			-layout: stores all the layout file, could be edited in GUI.
 			-values: manages the id-value, each id could have different values like languages. different value packages are stored in different value folders
 		
@@ -69,6 +69,6 @@ About:
 		src: 
 			server/common packages: same as Hangman Game project
 			client:
-				-net/ controller: modified in several places, but basically serves the same funcions
+				-net/ controller: modified in several places, but basically serves the same functions
 				-activity: activity classes, each activity could be understood as a different page
 	

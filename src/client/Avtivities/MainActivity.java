@@ -1,4 +1,4 @@
-package client.Avtivities;
+package client.avtivities;
 
 import java.io.Serializable;
 
