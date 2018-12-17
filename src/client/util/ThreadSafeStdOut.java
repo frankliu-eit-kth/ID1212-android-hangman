@@ -1,4 +1,4 @@
-package client.view;
+package client.util;
 
 /**
  * This class provides a thread safe output, all methods are synchronized.

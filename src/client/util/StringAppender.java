@@ -1,4 +1,4 @@
-package client.net;
+package client.util;
 
 public class StringAppender {
 	private String seperator;

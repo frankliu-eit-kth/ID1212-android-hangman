@@ -1,4 +1,4 @@
-package client.view;
+package client.Avtivities;
 
 import java.io.Serializable;
 
@@ -19,23 +19,44 @@ import client.net.OutputHandler;
 
 public class MainActivity extends Activity {
 	
-
+/**
+ * @role: the default entry point of the application
+ * 		  provides a UI which reads username and pass it to ConnectionActivity through Intent
+ * 		  does not involve any network operations or logic operations
+ * 
+ * @robustness: very robust
+ */
 	public final static String EXTRA_MESSAGE = "com.example.MainActivity.MESSAGE";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		/**
+		 * default setup
+		 */
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//netController.connect(HOST, PORT, outputHandler);
+		/**
+		 * UI setup
+		 */
 		setupActivity();
 		
 	}
 
 	
 	private void setupActivity() {
+		/**
+		 * get "start" buttion
+		 */
 		final Button startButton=(Button) findViewById(R.id.start_button);
+		/**
+		 * get "username" editable text field
+		 */
 		final EditText nameInput=(EditText) findViewById(R.id.enter_name_textview);
-		
+		/**
+		 * 
+		 * define the function of buttion
+		 *  when click, pass username to start Activity then finish
+		 */
 		startButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -53,7 +74,7 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	
+	//system auto-generate
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -61,6 +82,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	//system auto-generate
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

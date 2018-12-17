@@ -11,11 +11,12 @@ import java.net.Socket;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import client.util.StringAppender;
 import common.GlobalConstants;
 import common.MessageException;
 import common.MsgType;
 
-/*
+/**
  * @role: provides network operations for the upper level
  * 
  * @methods provide to the view:
@@ -23,7 +24,10 @@ import common.MsgType;
  * 	disconnect(): send a DISCONNECT message to server and then close the socket, the listener thread will naturally die
  * 	sendUsername()
  * 	sendStart()
- * 	sendInput() 
+ * 	sendInput()
+ * 
+ *  @Update changed several methods compare to Hangman Project
+ *  		in sendMessage method: Due to the compile version cannot use StringJoiner, therefore manually create another util class StringAppender to join Strings
  */
 public class ServerConnection implements Serializable {
 	/*

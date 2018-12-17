@@ -1,4 +1,4 @@
-package client.view;
+package client.Avtivities;
 
 import java.io.Serializable;
 
@@ -14,37 +14,40 @@ import android.view.View;
 import android.widget.ProgressBar;
 import client.controller.NetworkController;
 import client.net.OutputHandler;
-
+import client.util.GameStatus;
+/**
+ * 
+ * @author Liming Liu
+ * @role send start message to server for game initialization then send username to update it
+ * 		 when sending start this activity will also pass MessageHandler to ServerConnection class for the purpose of handling game message
+ * 		 after start game and send user name, this activity will act as the server message handler, its MessageHandler field will staty still to parse server message and start new game activity
+ * @robustness: There's not any clear logical mistake, but I don't feel this is the best practice to handle message. A utility class might be more appropriate
+ *
+ */
 public class StartActivity extends Activity {
-	private ProgressBar mProgress;
-	//private NetworkController netController;
+	
 	private MessageHandler msgHandler;
 	public final static String EXTRA_GAMESTATUS="com.example.startActivity.GAMESTATUS";
-	//public final static String EXTRA_CONTROLLER="com.example.startActivity.CONTROLLER";
 	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		
-		
-		mProgress = (ProgressBar) findViewById(R.id.progressBar1);
-		mProgress.setVisibility(View.VISIBLE);
-		
-		//netController=(NetworkController)getIntent().getSerializableExtra(ConnectionActivity.EXTRA_CONTROLLER);
 		String username=(String)getIntent().getSerializableExtra(ConnectionActivity.EXTRA_USERNAME);
 		msgHandler=new MessageHandler();
 		NetworkController.start();
 		NetworkController.sendUsername(username, msgHandler);
 	}
-
+	//system auto
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.start, menu);
 		return true;
 	}
-
+	//system auto
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -61,7 +64,7 @@ public class StartActivity extends Activity {
 	private class MessageHandler implements OutputHandler {
 		@Override
 		public void handleMsg(String msg) {
-			// TODO Auto-generated method stub
+			// handles "lost connection" message
 			if(msg.contains(" ")) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this);
                 builder.setMessage(getString(R.string.lost_connection))
@@ -69,14 +72,11 @@ public class StartActivity extends Activity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
         	}
-			
+			//parse to game status and pass the game status to GameActivity to show the user
         	GameStatus gameStatus=new GameStatus(msg);
         	Intent intent=new Intent(StartActivity.this,GameActivity.class);
         	intent.putExtra(EXTRA_GAMESTATUS,(Serializable)gameStatus);
-        	//intent.putExtra(EXTRA_CONTROLLER, (Serializable)netController);
         	startActivity(intent);
-    		mProgress.setVisibility(View.GONE);
-    		
 		}
 	}
 }

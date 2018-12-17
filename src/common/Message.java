@@ -1,6 +1,6 @@
 package common;
 
-import client.net.StringAppender;
+import client.util.StringAppender;
 /**
  * a new class added in this version to reduce the repetition on message handling codes
  * @author Liming Liu

@@ -7,9 +7,7 @@ import client.net.OutputHandler;
 import client.net.ServerConnection;
 
 /**
- * This controller decouples the view from the network layer. All methods, except
- * <code>disconnect</code>, submit their task to the common thread pool, provided by
- * <code>ForkJoinPool.commonPool</code>, and then return immediately.
+ * Exact same code as Hangman Game project
  */
 public class NetworkController {
     public static final ServerConnection serverConnection = new ServerConnection();
