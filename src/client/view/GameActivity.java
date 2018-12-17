@@ -1,22 +1,29 @@
 package client.view;
 
+import java.io.Serializable;
+
 import com.example.hangman.R;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import client.controller.NetworkController;
+import client.net.OutputHandler;
 
 public class GameActivity extends Activity {
 
-    public final static String EXTRA_MESSAGE = "com.example.GameActivity.MESSAGE";
-	static final String HOST="localhost";
-	static final int PORT=8080;
+    public final static String EXTRA_GAMESTATUS = "com.example.GameActivity.GameStatus";
 	NetworkController netController;
 	private GameStatus status;
-	
+	//private ProgressBar mProgress;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,8 +32,32 @@ public class GameActivity extends Activity {
 			status=(GameStatus)getIntent().getSerializableExtra(StartActivity.EXTRA_GAMESTATUS);
 			//NetworkController netController=(NetworkController)getIntent().getSerializableExtra(StartActivity.EXTRA_CONTROLLER);
 			String username=status.getPlayerName();
-			TextView tv=(TextView)findViewById(R.id.userName);
-			tv.setText(username);
+			TextView tv1=(TextView)findViewById(R.id.userName);
+			tv1.setText("username "+username);
+			TextView tv2=(TextView)findViewById(R.id.Score);
+			tv2.setText("current score " +status.getScore());
+			TextView tv3=(TextView)findViewById(R.id.Attempts);
+			tv3.setText("remaining attempts "+status.getAttempts());
+			TextView tv4=(TextView)findViewById(R.id.Hintword);
+			tv4.setText(status.getHintWord());
+			
+			final Button submitButton=(Button) findViewById(R.id.SubmitLetter);
+			final EditText letterInput=(EditText) findViewById(R.id.next_letter_edit_text);
+			
+			//mProgress = (ProgressBar) findViewById(R.id.progressBar1);
+			
+			submitButton.setOnClickListener(new View.OnClickListener()
+	        {
+	            public void onClick(View v)
+	            {
+	            	String inputString=letterInput.getText().toString();
+	                if(inputString!=null&&inputString.length()!=0) {
+	                	  //mProgress.setVisibility(View.VISIBLE);
+	                      NetworkController.sendInput(inputString);
+	                      finish();
+	                }    
+	            }
+	        });
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,5 +84,5 @@ public class GameActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-    
+	
 }

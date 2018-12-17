@@ -69,13 +69,14 @@ public class StartActivity extends Activity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
         	}
+			
         	GameStatus gameStatus=new GameStatus(msg);
         	Intent intent=new Intent(StartActivity.this,GameActivity.class);
         	intent.putExtra(EXTRA_GAMESTATUS,(Serializable)gameStatus);
         	//intent.putExtra(EXTRA_CONTROLLER, (Serializable)netController);
         	startActivity(intent);
     		mProgress.setVisibility(View.GONE);
-    		finish();	
+    		
 		}
 	}
 }

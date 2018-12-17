@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import common.GlobalConstants;
 import common.MessageException;
@@ -119,8 +121,9 @@ public class ServerConnection implements Serializable {
      * 		4.pass the message body to output handler (which will pass the message to the view for further handle)
      * @life: will die when the socket closes
      */
-    private class Listener implements Runnable {
+    private class Listener extends Thread {
         private final OutputHandler outputHandler;
+        //public Handler mHandler;
 
         private Listener(OutputHandler outputHandler) {
             this.outputHandler = outputHandler;
@@ -128,15 +131,19 @@ public class ServerConnection implements Serializable {
 
         @Override
         public void run() {
-            try {
-                for (;;) {
-                    outputHandler.handleMsg(extractMsgBody(fromServer.readLine()));
-                }
-            } catch (Throwable connectionFailure) {
-                if (connected) {
-                    outputHandler.handleMsg("Lost connection.");
-                }
-            }
+        	Looper.prepare();
+        	  
+        	try {
+	                for (;;) {
+	                    outputHandler.handleMsg(extractMsgBody(fromServer.readLine()));
+	                }
+	            } catch (Throwable connectionFailure) {
+	                Log.e("connectino failure",Log.getStackTraceString(connectionFailure));
+	            }
+		          
+	        		
+        	Looper.loop();
+        	
         }
 
         private String extractMsgBody(String entireMsg) {

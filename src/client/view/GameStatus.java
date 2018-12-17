@@ -1,11 +1,16 @@
 package client.view;
 
+import java.io.Serializable;
+
+import android.util.Log;
+import common.GlobalConstants;
+
 /*
  * @role: a Java bean for manipulating the current game status, used to display the current user status on console
  * 
  */
 
-public class GameStatus {
+public class GameStatus implements Serializable {
 	/*
 	 * @role: used to extract fields from the message
 	 */
@@ -26,7 +31,9 @@ public class GameStatus {
 	 * @role: constructor: parse the message into game status
 	 */
 	public GameStatus(String parseMessage){
-		String[] fields=parseMessage.split(";");
+		Log.d("message body", parseMessage);
+		String[] fields=parseMessage.split(GlobalConstants.MSG_BODY_DELIMETER);
+		Log.d("1st element", fields[0]);
 		this.playerName=fields[INDEX_PLAYER_NAME];
 		this.currentGameState=fields[INDEX_GAME_STATE];
 		this.score=Integer.parseInt(fields[INDEX_SCORE]);

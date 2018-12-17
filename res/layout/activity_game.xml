@@ -32,7 +32,43 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/next_letter_edit_text"
         android:layout_below="@+id/next_letter_edit_text"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="92dp"
         android:text="username" />
+
+    <Button
+        android:id="@+id/SubmitLetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/next_letter_edit_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="Submit" />
+
+    <TextView
+        android:id="@+id/Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userName"
+        android:layout_below="@+id/userName"
+        android:layout_marginTop="14dp"
+        android:text="Score" />
+
+    <TextView
+        android:id="@+id/Attempts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Score"
+        android:layout_below="@+id/Score"
+        android:layout_marginTop="20dp"
+        android:text="Attempts" />
+
+    <TextView
+        android:id="@+id/Hintword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Attempts"
+        android:layout_below="@+id/Attempts"
+        android:layout_marginTop="22dp"
+        android:text="Hintword" />
 
 </RelativeLayout>
